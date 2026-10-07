@@ -3,6 +3,8 @@ from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPropertyAnimation, QEasingCurv
 from PyQt6.QtGui import QPainter, QColor, QBrush, QFont, QLinearGradient, QPen, QPainterPath
 import math
 
+from ui.widgets import COLORS
+
 
 class ProtectionOverlay(QWidget):
     unlock_requested = pyqtSignal()
@@ -51,13 +53,13 @@ class ProtectionOverlay(QWidget):
     @staticmethod
     def _unlock_style(opacity: float) -> str:
         return f"""QPushButton {{
-            background-color: rgba(0, 229, 160, {0.9 * opacity});
-            color: rgba(10, 14, 23, {opacity});
-            border: none; border-radius: 12px;
+            background-color: rgba(74, 222, 128, {0.9 * opacity});
+            color: rgba(29, 32, 37, {opacity});
+            border: none; border-radius: 14px;
             padding: 14px 36px; font-size: 14px; font-weight: 700;
         }}
-        QPushButton:hover {{ background-color: rgba(0, 229, 160, {min(1.0, opacity * 1.1)}); }}
-        QPushButton:pressed {{ background-color: rgba(0, 179, 125, {opacity}); }}"""
+        QPushButton:hover {{ background-color: rgba(74, 222, 128, {min(1.0, opacity * 1.1)}); }}
+        QPushButton:pressed {{ background-color: rgba(34, 197, 94, {opacity}); }}"""
 
     def _build_pin_pad(self) -> None:
         layout = QVBoxLayout(self._pin_container)
@@ -66,26 +68,26 @@ class ProtectionOverlay(QWidget):
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._pin_dots = QLabel("", self._pin_container)
-        self._pin_dots.setFont(QFont("Segoe UI", 28, QFont.Weight.Bold))
-        self._pin_dots.setStyleSheet("color: #e8ecf4; background: transparent; letter-spacing: 12px;")
+        self._pin_dots.setFont(QFont("Segoe UI Variable Display", 28, QFont.Weight.DemiBold))
+        self._pin_dots.setStyleSheet(f"color: {COLORS['text_primary']}; background: transparent; letter-spacing: 12px;")
         self._pin_dots.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._pin_dots.setFixedHeight(50)
         layout.addWidget(self._pin_dots)
 
         self._pin_msg = QLabel("", self._pin_container)
         self._pin_msg.setFont(QFont("Segoe UI", 10))
-        self._pin_msg.setStyleSheet("color: #ff3b5c; background: transparent;")
+        self._pin_msg.setStyleSheet(f"color: {COLORS['danger']}; background: transparent;")
         self._pin_msg.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._pin_msg.setFixedHeight(20)
         layout.addWidget(self._pin_msg)
 
-        btn_style = """QPushButton {{
-            background: rgba(30, 41, 59, 0.8); color: #e8ecf4;
-            border: 1px solid rgba(45, 58, 80, 0.6); border-radius: 28px;
+        btn_style = f"""QPushButton {{
+            background: rgba(34, 38, 44, 0.85); color: {COLORS['text_primary']};
+            border: 1px solid rgba(42, 46, 53, 0.7); border-radius: 28px;
             font-size: 18px; font-weight: 600;
         }}
-        QPushButton:hover {{ background: rgba(45, 58, 80, 0.9); border-color: rgba(0, 229, 160, 0.4); }}
-        QPushButton:pressed {{ background: rgba(0, 229, 160, 0.3); }}"""
+        QPushButton:hover {{ background: rgba(42, 46, 53, 0.95); border-color: rgba(74, 222, 128, 0.45); }}
+        QPushButton:pressed {{ background: rgba(74, 222, 128, 0.3); }}"""
 
         keys = [
             ["1", "2", "3"],
@@ -249,21 +251,21 @@ class ProtectionOverlay(QWidget):
         p.end()
 
     def _paint_observer(self, p: QPainter, w: int, h: int) -> None:
-        bg = QColor("#0a0e17")
+        bg = QColor(COLORS["bg_primary"])
         bg.setAlphaF(self._opacity)
         p.fillRect(0, 0, w, h, bg)
 
         grad = QLinearGradient(0, 0, w, h)
-        c1 = QColor("#00e5a0")
+        c1 = QColor(COLORS["accent"])
         c1.setAlphaF(0.04 + 0.02 * math.sin(self._phase))
-        c2 = QColor("#6366f1")
+        c2 = QColor(COLORS["sharing"])
         c2.setAlphaF(0.03 + 0.02 * math.sin(self._phase + 1.5))
         grad.setColorAt(0, c1)
         grad.setColorAt(1, c2)
         p.fillRect(0, 0, w, h, QBrush(grad))
 
         # Grid
-        lc = QColor("#00e5a0")
+        lc = QColor(COLORS["accent"])
         lc.setAlphaF(0.06)
         p.setPen(QPen(lc, 1))
         sp = 40
@@ -276,8 +278,8 @@ class ProtectionOverlay(QWidget):
         # Shield icon
         ss = 80
         cx_s, cy_s = w / 2, h / 2 - ss / 2 - 30
-        sc = QColor("#00e5a0")
-        sc.setAlphaF(0.5 + 0.2 * math.sin(self._phase * 1.5))
+        sc = QColor(COLORS["accent"])
+        sc.setAlphaF(0.55 + 0.2 * math.sin(self._phase * 1.5))
         p.setPen(QPen(sc, 2.5))
         p.setBrush(Qt.BrushStyle.NoBrush)
         path = QPainterPath()
@@ -290,48 +292,46 @@ class ProtectionOverlay(QWidget):
         path.closeSubpath()
         p.drawPath(path)
         # Checkmark
-        cc = QColor("#00e5a0")
-        cc.setAlphaF(0.7)
+        cc = QColor(COLORS["accent"])
+        cc.setAlphaF(0.75)
         p.setPen(QPen(cc, 3, Qt.PenStyle.SolidLine, Qt.PenCapStyle.RoundCap, Qt.PenJoinStyle.RoundJoin))
         p.drawLine(int(cx_s - 15), int(cy_s + ss * 0.55), int(cx_s - 2), int(cy_s + ss * 0.72))
         p.drawLine(int(cx_s - 2), int(cy_s + ss * 0.72), int(cx_s + 18), int(cy_s + ss * 0.35))
 
-        p.setFont(QFont("Segoe UI", 22, QFont.Weight.Bold))
-        tc = QColor("#e8ecf4")
-        tc.setAlphaF(0.85)
+        p.setFont(QFont("Segoe UI Variable Display", 22, QFont.Weight.DemiBold))
+        tc = QColor(COLORS["text_primary"])
+        tc.setAlphaF(0.88)
         p.setPen(tc)
         p.drawText(0, h // 2 + ss // 2 + 10, w, 40, Qt.AlignmentFlag.AlignCenter, "ÉCRAN PROTÉGÉ")
         p.setFont(QFont("Segoe UI", 12))
-        stc = QColor("#8892a4")
-        stc.setAlphaF(0.7)
+        stc = QColor(COLORS["text_secondary"])
+        stc.setAlphaF(0.75)
         p.setPen(stc)
         p.drawText(0, h // 2 + ss // 2 + 55, w, 30, Qt.AlignmentFlag.AlignCenter, "Un observateur a été détecté")
 
         if self._show_unlock and self._btn_opacity > 0.3 and not self._pin_container.isVisible():
             p.setFont(QFont("Segoe UI", 9))
-            htc = QColor("#8892a4")
-            htc.setAlphaF(0.4 * self._btn_opacity)
+            htc = QColor(COLORS["text_secondary"])
+            htc.setAlphaF(0.45 * self._btn_opacity)
             p.setPen(htc)
             by = self.height() - self._unlock_btn.height() - 60
             p.drawText(0, by - 26, w, 20, Qt.AlignmentFlag.AlignCenter, "Cliquez ci-dessous pour lever la protection")
 
     def _paint_absence(self, p: QPainter, w: int, h: int) -> None:
-        # Darker, warmer background for absence mode
-        bg = QColor("#0c0814")
+        bg = QColor("#17141c")
         bg.setAlphaF(self._opacity)
         p.fillRect(0, 0, w, h, bg)
 
         grad = QLinearGradient(0, 0, w, h)
-        c1 = QColor("#6366f1")
+        c1 = QColor(COLORS["sharing"])
         c1.setAlphaF(0.05 + 0.02 * math.sin(self._phase))
-        c2 = QColor("#a855f7")
+        c2 = QColor(COLORS["purple"])
         c2.setAlphaF(0.04 + 0.02 * math.sin(self._phase + 1.2))
         grad.setColorAt(0, c1)
         grad.setColorAt(1, c2)
         p.fillRect(0, 0, w, h, QBrush(grad))
 
-        # Subtle dot pattern instead of grid
-        dot_c = QColor("#6366f1")
+        dot_c = QColor(COLORS["sharing"])
         dot_c.setAlphaF(0.08)
         p.setPen(Qt.PenStyle.NoPen)
         p.setBrush(QBrush(dot_c))
@@ -341,61 +341,54 @@ class ProtectionOverlay(QWidget):
             for xx in range(-sp + off, w + sp, sp):
                 p.drawEllipse(xx - 1, yy - 1, 2, 2)
 
-        # Lock icon
         cx_l = w / 2
         cy_l = h / 2 - 80
-        lock_c = QColor("#a855f7")
-        lock_c.setAlphaF(0.6 + 0.15 * math.sin(self._phase * 1.2))
+        lock_c = QColor(COLORS["purple"])
+        lock_c.setAlphaF(0.65 + 0.15 * math.sin(self._phase * 1.2))
         p.setPen(QPen(lock_c, 2.5))
         p.setBrush(Qt.BrushStyle.NoBrush)
 
-        # Shackle (arc)
         shackle_w, shackle_h = 36, 32
         p.drawArc(
             int(cx_l - shackle_w / 2), int(cy_l - shackle_h),
             int(shackle_w), int(shackle_h * 2),
             0, 180 * 16,
         )
-        # Body (rounded rect)
         body_w, body_h = 50, 38
         body_r = 6
         p.setPen(QPen(lock_c, 2.5))
-        body_fill = QColor("#6366f1")
+        body_fill = QColor(COLORS["sharing"])
         body_fill.setAlphaF(0.15)
         p.setBrush(QBrush(body_fill))
         p.drawRoundedRect(
             int(cx_l - body_w / 2), int(cy_l),
             int(body_w), int(body_h), body_r, body_r,
         )
-        # Keyhole
-        kh_c = QColor("#a855f7")
-        kh_c.setAlphaF(0.7)
+        kh_c = QColor(COLORS["purple"])
+        kh_c.setAlphaF(0.75)
         p.setBrush(QBrush(kh_c))
         p.setPen(Qt.PenStyle.NoPen)
         p.drawEllipse(int(cx_l - 5), int(cy_l + 10), 10, 10)
         p.setPen(QPen(kh_c, 2.5))
         p.drawLine(int(cx_l), int(cy_l + 18), int(cx_l), int(cy_l + 28))
 
-        # Title
-        p.setFont(QFont("Segoe UI", 22, QFont.Weight.Bold))
-        tc = QColor("#e8ecf4")
-        tc.setAlphaF(0.85)
+        p.setFont(QFont("Segoe UI Variable Display", 22, QFont.Weight.DemiBold))
+        tc = QColor(COLORS["text_primary"])
+        tc.setAlphaF(0.88)
         p.setPen(tc)
         p.drawText(0, int(cy_l + body_h + 24), w, 40, Qt.AlignmentFlag.AlignCenter, "SESSION VERROUILLÉE")
 
-        # Subtitle
         p.setFont(QFont("Segoe UI", 12))
-        stc = QColor("#8892a4")
-        stc.setAlphaF(0.7)
+        stc = QColor(COLORS["text_secondary"])
+        stc.setAlphaF(0.75)
         p.setPen(stc)
         sub = "Utilisateur absent — Entrez le code PIN" if self._pin_code else "Utilisateur absent"
         p.drawText(0, int(cy_l + body_h + 68), w, 30, Qt.AlignmentFlag.AlignCenter, sub)
 
-        # Hint for unlock button when visible (no PIN)
         if self._show_unlock and self._btn_opacity > 0.3 and not self._pin_container.isVisible():
             p.setFont(QFont("Segoe UI", 9))
-            htc = QColor("#8892a4")
-            htc.setAlphaF(0.4 * self._btn_opacity)
+            htc = QColor(COLORS["text_secondary"])
+            htc.setAlphaF(0.45 * self._btn_opacity)
             p.setPen(htc)
             by = self.height() - self._unlock_btn.height() - 60
             p.drawText(0, by - 26, w, 20, Qt.AlignmentFlag.AlignCenter, "Cliquez ci-dessous pour déverrouiller")

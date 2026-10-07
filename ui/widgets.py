@@ -3,22 +3,25 @@ from PyQt6.QtCore import Qt, pyqtSignal, QPropertyAnimation, QEasingCurve, pyqtP
 from PyQt6.QtGui import QPainter, QColor, QPen, QRadialGradient, QFont, QBrush
 
 COLORS = {
-    "bg_primary": "#0a0e17",
-    "bg_secondary": "#111827",
-    "bg_tertiary": "#1a2235",
-    "bg_card": "#151d2e",
-    "accent": "#00e5a0",
-    "accent_dim": "#00b37d",
-    "danger": "#ff3b5c",
-    "danger_dim": "#cc2f4a",
-    "warning": "#ffb020",
-    "text_primary": "#e8ecf4",
-    "text_secondary": "#8892a4",
-    "text_muted": "#4a5568",
-    "border": "#1e293b",
-    "border_light": "#2d3a50",
-    "sharing": "#6366f1",
-    "sharing_dim": "#4f46e5",
+    # Neomorphic dark theme — shared with ui_web/style.css
+    "bg_primary": "#1d2025",     # --bg
+    "bg_secondary": "#22262c",   # --bg-2
+    "bg_tertiary": "#2a2e35",    # --sh-light (raised surface)
+    "bg_card": "#22262c",
+    "accent": "#4ade80",         # --green
+    "accent_dim": "#22c55e",     # --green-2
+    "danger": "#f87171",         # --red
+    "danger_dim": "#ef4444",
+    "warning": "#fbbf24",        # --amber
+    "text_primary": "#e4e7eb",   # --text
+    "text_secondary": "#a3a9b3", # --text-2
+    "text_muted": "#6c737e",     # --muted
+    "border": "#131518",         # --sh-dark
+    "border_light": "#2a2e35",   # --sh-light
+    "sharing": "#60a5fa",        # --blue
+    "sharing_dim": "#3b82f6",
+    "cyan": "#67e8f9",
+    "purple": "#c084fc",
 }
 
 
@@ -80,9 +83,9 @@ class PowerButton(QWidget):
         w, h = self.width(), self.height()
         cx, cy = w / 2, h / 2
         radius = min(w, h) / 2 - 8
-        accent = QColor("#00e5a0")
-        inactive = QColor("#2d3a50")
-        base = QColor("#111827")
+        accent = QColor(COLORS["accent"])
+        inactive = QColor(COLORS["text_muted"])
+        base = QColor(COLORS["bg_primary"])
         g = self._glow_intensity
         color = QColor(
             int(inactive.red() + (accent.red() - inactive.red()) * g),
@@ -123,7 +126,7 @@ class PowerButton(QWidget):
 class StatusIndicator(QWidget):
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self._color = QColor("#2d3a50")
+        self._color = QColor(COLORS["text_muted"])
         self._pulse = False
         self.setFixedSize(12, 12)
 
@@ -170,13 +173,13 @@ class SuspicionBar(QWidget):
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
         w, h = self.width(), self.height()
-        p.setBrush(QBrush(QColor("#1a2235")))
+        p.setBrush(QBrush(QColor("#15171b")))
         p.setPen(Qt.PenStyle.NoPen)
         p.drawRoundedRect(0, 0, w, h, h / 2, h / 2)
         ratio = self._value / self._max if self._max > 0 else 0
         fill_w = int(w * ratio)
         if fill_w > 0:
-            color = QColor("#00e5a0") if ratio < 0.5 else QColor("#ffb020") if ratio < 0.8 else QColor("#ff3b5c")
+            color = QColor(COLORS["accent"]) if ratio < 0.5 else QColor(COLORS["warning"]) if ratio < 0.8 else QColor(COLORS["danger"])
             p.setBrush(QBrush(color))
             p.drawRoundedRect(0, 0, fill_w, h, h / 2, h / 2)
         p.end()

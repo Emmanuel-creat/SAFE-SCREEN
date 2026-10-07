@@ -1,7 +1,11 @@
+/* ScreenGuard — QSS global pour les widgets Qt résiduels
+   (mini-fenêtre, overlay, dialogue de calibration, popup de décision).
+   La fenêtre principale est rendue en HTML/CSS/JS dans ui_web/. */
+
 QWidget {
-    background-color: #0a0e17;
-    color: #e8ecf4;
-    font-family: "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+    background-color: #1d2025;
+    color: #e4e7eb;
+    font-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", sans-serif;
     font-size: 13px;
 }
 QLabel {
@@ -9,52 +13,52 @@ QLabel {
     padding: 0px;
 }
 QPushButton {
-    background-color: #1a2235;
-    color: #e8ecf4;
-    border: 1px solid #2d3a50;
-    border-radius: 8px;
+    background-color: #22262c;
+    color: #e4e7eb;
+    border: 1px solid #2a2e35;
+    border-radius: 12px;
     padding: 10px 20px;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
 }
 QPushButton:hover {
-    background-color: #151d2e;
-    border-color: #00b37d;
+    background-color: #262a30;
+    border-color: #4ade80;
 }
 QPushButton:pressed {
-    background-color: #111827;
+    background-color: #1a1d22;
 }
 QPushButton:disabled {
-    color: #4a5568;
-    border-color: #1e293b;
+    color: #6c737e;
+    border-color: #22262c;
 }
 QSlider::groove:horizontal {
     height: 6px;
-    background: #1a2235;
+    background: #15171b;
     border-radius: 3px;
 }
 QSlider::handle:horizontal {
-    background: #00e5a0;
+    background: #4ade80;
     width: 16px;
     height: 16px;
     margin: -5px 0;
     border-radius: 8px;
 }
 QSlider::sub-page:horizontal {
-    background: #00b37d;
+    background: #22c55e;
     border-radius: 3px;
 }
 QSpinBox, QDoubleSpinBox, QComboBox {
-    background-color: #1a2235;
-    border: 1px solid #2d3a50;
-    border-radius: 6px;
-    padding: 6px 12px;
-    color: #e8ecf4;
+    background-color: #22262c;
+    border: 1px solid #2a2e35;
+    border-radius: 10px;
+    padding: 7px 12px;
+    color: #e4e7eb;
     font-size: 13px;
 }
 QSpinBox::up-button, QSpinBox::down-button,
 QDoubleSpinBox::up-button, QDoubleSpinBox::down-button {
-    background: #151d2e;
+    background: #1a1d22;
     border: none;
     width: 20px;
 }
@@ -63,30 +67,30 @@ QComboBox::drop-down {
     width: 24px;
 }
 QComboBox QAbstractItemView {
-    background-color: #111827;
-    border: 1px solid #2d3a50;
-    selection-background-color: #00b37d;
-    color: #e8ecf4;
+    background-color: #22262c;
+    border: 1px solid #2a2e35;
+    selection-background-color: #22c55e;
+    color: #e4e7eb;
 }
 QCheckBox {
     spacing: 8px;
-    color: #e8ecf4;
+    color: #e4e7eb;
 }
 QCheckBox::indicator {
     width: 18px;
     height: 18px;
-    border-radius: 4px;
-    border: 2px solid #2d3a50;
-    background: #1a2235;
+    border-radius: 5px;
+    border: 1px solid #2a2e35;
+    background: #22262c;
 }
 QCheckBox::indicator:checked {
-    background: #00e5a0;
-    border-color: #00e5a0;
+    background: #4ade80;
+    border-color: #4ade80;
 }
 QGroupBox {
-    background-color: #151d2e;
-    border: 1px solid #1e293b;
-    border-radius: 10px;
+    background-color: #22262c;
+    border: 1px solid #131518;
+    border-radius: 14px;
     margin-top: 14px;
     padding: 16px 12px 12px 12px;
     font-weight: 600;
@@ -96,22 +100,22 @@ QGroupBox::title {
     subcontrol-origin: margin;
     subcontrol-position: top left;
     padding: 2px 12px;
-    color: #8892a4;
+    color: #a3a9b3;
 }
 QScrollArea {
     border: none;
     background: transparent;
 }
 QProgressBar {
-    background: #1a2235;
-    border: 1px solid #2d3a50;
+    background: #15171b;
+    border: 1px solid #22262c;
     border-radius: 6px;
     height: 14px;
     text-align: center;
-    color: #e8ecf4;
+    color: #e4e7eb;
     font-size: 10px;
 }
 QProgressBar::chunk {
-    background: #00e5a0;
+    background: #4ade80;
     border-radius: 5px;
 }

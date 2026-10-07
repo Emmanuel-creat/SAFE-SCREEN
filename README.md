@@ -159,14 +159,20 @@ screenguard2/
 │   ├── calibrator.py           # Calibration visage utilisateur
 │   ├── user_profiles.py        # Encodage et comparaison faciale
 │   └── gaze_estimator.py       # Estimation direction du regard
+├── ui_web/
+│   ├── index.html             # Fenêtre principale (sidebar + dashboard)
+│   ├── style.css              # Thème néomorphique sombre
+│   ├── app.js                 # Logique UI + bridge pywebview
+│   └── mock.js                # Mock API pour prévisualiser sans Python
 └── ui/
     ├── __init__.py
-    ├── main_window.py          # Fenêtre principale + paramètres
-    ├── mini_window.py          # Mini-fenêtre flottante repliable
-    ├── overlay.py              # Overlay protection plein écran
-    ├── calibration_dialog.py   # Dialogue de calibration guidé
-    ├── styles.qss              # Feuille de style Qt externe
-    └── widgets.py              # Widgets custom (PowerButton, jauges)
+    ├── webview_app.py         # Bridge Python ↔ JS (pywebview)
+    ├── popup.py               # Popup de décision observateur
+    ├── mini_window.py         # Mini-fenêtre flottante repliable
+    ├── overlay.py             # Overlay protection plein écran
+    ├── calibration_dialog.py  # Dialogue de calibration guidé
+    ├── styles.qss             # Feuille de style Qt résiduelle
+    └── widgets.py             # Palette COLORS + widgets custom
 ```
 
 ## Dépendances
@@ -174,7 +180,9 @@ screenguard2/
 | Paquet | Version | Rôle |
 |---|---|---|
 | Python | ≥ 3.10 | Runtime |
-| PyQt6 | ≥ 6.6 | Interface graphique |
+| PyQt6 | ≥ 6.6 | Overlay, mini-fenêtre, calibration |
+| PyQt6-WebEngine | ≥ 6.6 | Backend Qt pour pywebview |
+| pywebview | ≥ 5.0 | Fenêtre principale HTML/CSS/JS |
 | mediapipe | ≥ 0.10.9 | Face Mesh 468 landmarks |
 | opencv-python-headless | ≥ 4.9 | Capture caméra, traitement image |
 | numpy | ≥ 1.24 | Calcul vectoriel |

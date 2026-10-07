@@ -14,15 +14,17 @@ a = Analysis(
     datas=[
         ('assets/*', 'assets'),
         ('ui/styles.qss', 'ui'),
+        ('ui_web/*', 'ui_web'),
     ] + mediapipe_data + cv2_data,
     hiddenimports=[
         'cv2', 'numpy', 'mediapipe',
         'mediapipe.python.solutions.face_mesh',
+        'webview', 'webview.platforms.qt',
         'config', 'config.settings', 'config.profiles',
         'core', 'core.engine', 'core.logger', 'core.state_machine',
         'vision', 'vision.mediapipe_detector', 'vision.calibrator',
         'vision.user_profiles', 'vision.gaze_estimator',
-        'ui', 'ui.main_window', 'ui.mini_window', 'ui.overlay',
+        'ui', 'ui.webview_app', 'ui.popup', 'ui.mini_window', 'ui.overlay',
         'ui.calibration_dialog', 'ui.widgets',
     ],
     hookspath=[],

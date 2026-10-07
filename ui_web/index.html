@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScreenGuard</title>
+<link rel="stylesheet" href="style.css">
+<script>window.__errs = []; addEventListener("error", (e) => __errs.push(`${e.message} @${e.lineno}`)); addEventListener("unhandledrejection", (e) => __errs.push(String(e.reason)));</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v8M7.05 6.05a8 8 0 1 0 9.9 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="16" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-face" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.1" fill="currentColor"/><circle cx="15" cy="10" r="1.1" fill="currentColor"/><path d="M9 15c1.5 1.3 4.5 1.3 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 1 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7l1.5-3h5L16 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5L22 20H2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7M20 4v4.5h-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <!-- ============ Sidebar ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo"><svg><use href="#i-shield"/></svg></div>
+      <div>
+        <div class="brand-name">ScreenGuard</div>
+        <div class="brand-sub">Visual privacy · local</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-page="dash"><svg><use href="#i-home"/></svg><span>Tableau de bord</span></button>
+      <button class="nav-item" data-page="detect"><svg><use href="#i-eye"/></svg><span>Détection</span></button>
+      <button class="nav-item" data-page="display"><svg><use href="#i-sliders"/></svg><span>Affichage</span></button>
+      <button class="nav-item" data-page="security"><svg><use href="#i-lock"/></svg><span>Sécurité</span></button>
+      <button class="nav-item" data-page="calib"><svg><use href="#i-face"/></svg><span>Calibration</span><i class="nav-badge" id="calib-badge"></i></button>
+      <button class="nav-item" data-page="about"><svg><use href="#i-info"/></svg><span>À propos</span></button>
+    </nav>
+
+    <div class="side-card">
+      <div class="side-card-head"><svg class="ico"><use href="#i-camera"/></svg><span>Caméra</span></div>
+      <div class="tunnel-state" id="cam-state">en attente</div>
+      <button class="addr" id="session-info"><span id="session-time">00:00</span><svg><use href="#i-refresh"/></svg></button>
+    </div>
+  </aside>
+
+  <!-- ============ Content ============ -->
+  <main class="content">
+    <div class="topbar">
+      <div>
+        <h1 id="page-title">Tableau de bord</h1>
+        <p class="subtitle" id="page-sub">Vue d'ensemble du système de protection</p>
+      </div>
+      <div class="status-pill" id="status-pill"><i></i><span id="status-label">Inactif</span></div>
+    </div>
+
+    <!-- ============ DASH ============ -->
+    <section class="page active" data-page="dash">
+      <div class="grid-dash">
+        <div class="card hero">
+          <button class="power" id="power-btn">
+            <div class="power-ring"></div>
+            <svg><use href="#i-power"/></svg>
+          </button>
+          <div class="hero-info">
+            <div class="hero-state" id="hero-state">Inactif</div>
+            <div class="hero-motd" id="hero-motd">Protection visuelle désactivée</div>
+            <div class="hero-uptime">Session : <b id="hero-uptime">—</b></div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn primary" id="share-btn" disabled><svg><use href="#i-eye"/></svg>Partager 1 min</button>
+            <button class="btn danger" id="dismiss-btn" disabled><svg><use href="#i-x"/></svg>Lever la protection</button>
+          </div>
+        </div>
+
+        <div class="card gauge-card">
+          <div class="card-title">Suspicion <span class="count" id="susp-count">0.0 / 6</span></div>
+          <div class="gauge">
+            <svg viewBox="0 0 160 160">
+              <circle class="track" cx="80" cy="80" r="68"/>
+              <circle class="bar" id="susp-bar" cx="80" cy="80" r="68" transform="rotate(-90 80 80)"/>
+            </svg>
+            <div class="gauge-center"><b id="susp-val">0.0</b><span>SCORE</span></div>
+          </div>
+          <div class="gauge-foot" id="susp-foot">en veille</div>
+        </div>
+
+        <div class="card gauge-card">
+          <div class="card-title">Visages</div>
+          <div class="gauge">
+            <svg viewBox="0 0 160 160">
+              <circle class="track" cx="80" cy="80" r="68"/>
+              <circle class="bar" id="face-bar" cx="80" cy="80" r="68" transform="rotate(-90 80 80)" style="stroke: var(--blue);"/>
+            </svg>
+            <div class="gauge-center"><b id="face-val">0</b><span>DÉTECTÉ</span></div>
+          </div>
+          <div class="gauge-foot" id="face-foot">0 observateur</div>
+        </div>
+
+        <div class="card gauge-card">
+          <div class="card-title">Attention</div>
+          <div class="gauge">
+            <svg viewBox="0 0 160 160">
+              <circle class="track" cx="80" cy="80" r="68"/>
+              <circle class="bar" id="att-bar" cx="80" cy="80" r="68" transform="rotate(-90 80 80)" style="stroke: var(--cyan);"/>
+            </svg>
+            <div class="gauge-center"><b id="att-val">—</b><span>REGARD</span></div>
+          </div>
+          <div class="gauge-foot" id="att-foot">utilisateur absent</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Activité <span class="count"><span id="scan-count">0</span> scans · <span id="alert-count">0</span> alertes</span></div>
+        <div class="activity">
+          <div class="stat">
+            <div class="stat-top"><svg><use href="#i-eye"/></svg>Scans effectués<b id="stat-scans">0</b></div>
+            <div class="meter"><i id="meter-scans" style="width:0%; background: linear-gradient(90deg, #22c55e, #4ade80);"></i></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><svg><use href="#i-warn"/></svg>Alertes<b id="stat-alerts">0</b></div>
+            <div class="meter"><i id="meter-alerts" style="width:0%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></i></div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><svg><use href="#i-shield"/></svg>Partage restant<b id="stat-share">—</b></div>
+            <div class="meter"><i id="meter-share" style="width:0%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DETECTION ============ -->
+    <section class="page" data-page="detect">
+      <div class="card">
+        <div class="card-title">Paramètres de scan</div>
+        <div class="form-grid">
+          <div class="fld">
+            <label>Intervalle de scan <code>ms</code></label>
+            <input type="number" class="input" id="s-scan-ms" min="100" max="5000" step="50">
+          </div>
+          <div class="fld">
+            <label>Seuil de suspicion</label>
+            <input type="number" class="input" id="s-threshold" min="1" max="20" step="1">
+          </div>
+          <div class="fld">
+            <label>Décroissance du score</label>
+            <input type="number" class="input" id="s-decay" min="0.1" max="5.0" step="0.1">
+          </div>
+          <div class="fld">
+            <label>Délai anti-faux positifs</label>
+            <input type="number" class="input" id="s-fp" min="1" max="10" step="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Estimation du regard</div>
+        <div class="form-grid">
+          <div class="fld">
+            <label>Seuil lacet <code>°</code></label>
+            <input type="number" class="input" id="s-yaw" min="5" max="60" step="1">
+          </div>
+          <div class="fld">
+            <label>Seuil tangage <code>°</code></label>
+            <input type="number" class="input" id="s-pitch" min="5" max="60" step="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="savebar" id="savebar">
+        <span>Modifications non appliquées</span>
+        <button class="btn" id="btn-reset">Annuler</button>
+        <button class="btn primary" id="btn-apply"><svg><use href="#i-check"/></svg>Appliquer</button>
+      </div>
+    </section>
+
+    <!-- ============ DISPLAY ============ -->
+    <section class="page" data-page="display">
+      <div class="card">
+        <div class="card-title">Overlay &amp; mini-fenêtre</div>
+        <div class="form-grid">
+          <div class="fld bool">
+            <label>Retour caméra</label>
+            <label class="switch"><input type="checkbox" id="s-cam"><span></span></label>
+          </div>
+          <div class="fld bool">
+            <label>Démarrage automatique</label>
+            <label class="switch"><input type="checkbox" id="s-autostart"><span></span></label>
+          </div>
+          <div class="fld bool">
+            <label>Logs activés</label>
+            <label class="switch"><input type="checkbox" id="s-log"><span></span></label>
+          </div>
+          <div class="fld">
+            <label>Opacité overlay <code id="l-opacity">92%</code></label>
+            <input type="range" id="s-opacity" min="50" max="100">
+          </div>
+          <div class="fld">
+            <label>Durée partage <code>s</code></label>
+            <input type="number" class="input" id="s-share" min="10" max="3600" step="10">
+          </div>
+          <div class="fld">
+            <label>Index caméra</label>
+            <input type="number" class="input" id="s-camidx" min="0" max="10" step="1">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECURITY ============ -->
+    <section class="page" data-page="security">
+      <div class="card">
+        <div class="card-title">Déverrouillage par PIN</div>
+        <div class="form-grid">
+          <div class="fld">
+            <label>Code PIN à 4 chiffres <code>vide = bouton</code></label>
+            <input type="password" inputmode="numeric" maxlength="4" class="input pin-input" id="s-pin" placeholder="Aucun">
+          </div>
+          <div class="fld">
+            <label>Délai avant mode absence <code>× seuil</code></label>
+            <input type="number" class="input" id="s-abs" min="1.5" max="5.0" step="0.5">
+          </div>
+          <div class="fld note">Le PIN est utilisé quand l'utilisateur principal est absent de l'écran.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALIB ============ -->
+    <section class="page" data-page="calib">
+      <div class="card">
+        <div class="card-title">Profil utilisateur <span class="count" id="calib-status">Non calibré</span></div>
+        <p class="muted small" style="margin:0 0 18px">La calibration enregistre les repères faciaux de l'utilisateur principal (3 secondes face à la caméra). Elle sert à distinguer vous des observateurs potentiels.</p>
+        <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn primary" id="btn-calib"><svg><use href="#i-face"/></svg>Lancer la calibration</button>
+          <button class="btn danger" id="btn-reset-profile"><svg><use href="#i-trash"/></svg>Réinitialiser le profil</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="page" data-page="about">
+      <div class="card">
+        <div class="card-title">ScreenGuard Phase 2</div>
+        <p class="muted small" style="margin: 0 0 10px"><b>Protection visuelle d'écran, 100 % locale.</b></p>
+        <p class="muted small" style="margin: 0 0 6px">Détecteur · MediaPipe Face Mesh (468 landmarks)</p>
+        <p class="muted small" style="margin: 0 0 6px">Vision · OpenCV · caméra uniquement, aucune donnée transmise</p>
+        <p class="muted small" style="margin: 0 0 6px">UI · WebView2 + PyQt6 (overlay, mini-fenêtre)</p>
+        <p class="muted small" style="margin: 16px 0 0">v2.0 — Octobre 2026</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toasts" id="toasts"></div>
+<!-- Pour prévisualiser dans un navigateur : décommenter la ligne mock -->
+<!-- <script src="mock.js"></script> -->
+<script src="app.js"></script>
+</body>
+</html>
